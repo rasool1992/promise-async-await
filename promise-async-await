@@ -1,0 +1,40 @@
+console.log('First')
+
+async function finalResult(){
+    let cus = await getCustimer(1);
+    let courses = await getCourses(cus.userName);
+    let result = await getResult(courses.courseName);
+    console.log(result);
+}
+finalResult();
+let custimers = [
+    {id:1,userName:'Ahmed',age:35},
+    {id:2,userName:'Rasool',age:27},
+    {id:3,userName:'Mustafa',age:30}
+]
+function getCustimer(custid){
+    return Promise((resolve,reject)=>{
+        setTimeout(()=>{
+            var custmer = custimers.find(cust=>cust.custid === custid);
+            resolve(custmer);
+            reject('Can not find user');
+        },2000)
+    })
+}
+function getCourses(userName){
+    return Promise((resolve,reject)=>{
+        setTimeout(()=>{
+            resolve(['C#','C++']);
+        })
+    })
+}
+
+function getResult(courseName){
+    return Promise((resolve,reject)=>{
+        setTimeout(() => {
+            resolve('Excelent');
+        }, 2000);
+    })
+}
+
+console.log('Last')
